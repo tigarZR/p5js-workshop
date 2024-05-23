@@ -18,7 +18,12 @@ Helpful Links
 -------------
  1. [p5.js Documentation](https://p5js.org/reference/)
  2. Some great sketches for inspiration
-	 3. https://openprocessing.org/sketch/2182921
-	 4. https://openprocessing.org/sketch/2268661
-	 5. https://openprocessing.org/sketch/2186619
-	 6. https://openprocessing.org/sketch/422446
+	- https://openprocessing.org/sketch/2182921
+
+	- https://openprocessing.org/sketch/2268661
+
+	- https://openprocessing.org/sketch/2186619
+
+	- https://openprocessing.org/sketch/422446
+
+	- https://openprocessing.org/sketch/2181398
