@@ -2,9 +2,11 @@ import P5 from "p5";
 import { isSetup } from "./functions";
 
 const sketch = (p5: P5) => {
+	// instantiate a few variables
 	const wanderers: Wanderer[] = [];
 	let curColor = 100;
 
+	// built-in function for setting up the sketch, runs once
 	p5.setup = () => {
 		p5.createCanvas(window.innerWidth, window.innerHeight);
 		isSetup();
@@ -12,12 +14,15 @@ const sketch = (p5: P5) => {
 		p5.background(0, 0, 0);
 	};
 
+	// built-in function for drawing to the canvas, runs continuously at a frame rate
 	p5.draw = () => {
 		updateWanderers(wanderers);
 	};
 
+	// another built-in function, this time for mouse dragging
 	p5.mouseDragged = () => {
 		wanderers.push(new Wanderer(p5.createVector(p5.mouseX, p5.mouseY)));
+		// change the color slowly
 		curColor = (curColor % 100) + 1;
 	};
 

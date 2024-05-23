@@ -20,64 +20,61 @@ var p5_min = {exports: {}};
 
 var P5 = /*@__PURE__*/getDefaultExportFromCjs(p5_min.exports);
 
-var isSetup = function () { return console.log("yep!"); };
-
+// Bouncing DVD Logo
 var sketch = function (p5) {
-    var wanderers = [];
-    var curColor = 100;
+    var x;
+    var y;
+    var xspeed;
+    var yspeed;
+    var r;
+    var g;
+    var b;
+    var dvd;
+    p5.preload = function () {
+        dvd = p5.loadImage("dvd_logo.png");
+    };
+    // built-in function for setting up the sketch, runs once
     p5.setup = function () {
         p5.createCanvas(window.innerWidth, window.innerHeight);
-        isSetup();
-        p5.colorMode(p5.HSB, 100);
-        p5.background(0, 0, 0);
+        x = p5.random(p5.width);
+        y = p5.random(p5.height);
+        xspeed = 5;
+        yspeed = 5;
+        pickColor();
     };
+    var pickColor = function () {
+        r = p5.random(100, 256);
+        g = p5.random(100, 256);
+        b = p5.random(100, 256);
+    };
+    // built-in function for drawing to the canvas, runs continuously at a frame rate
     p5.draw = function () {
-        updateWanderers(wanderers);
-    };
-    p5.mouseDragged = function () {
-        wanderers.push(new Wanderer(p5.createVector(p5.mouseX, p5.mouseY)));
-        curColor = (curColor % 100) + 1;
-    };
-    var updateWanderers = function (wanderers) {
-        for (var _i = 0, wanderers_1 = wanderers; _i < wanderers_1.length; _i++) {
-            var wanderer = wanderers_1[_i];
-            wanderer.update();
-            if (wanderer.isDead()) {
-                wanderers.splice(wanderers.indexOf(wanderer), 1);
-            }
-            else {
-                wanderer.display();
-            }
+        p5.background(0);
+        // Draw the DVD logo
+        p5.tint(r, g, b);
+        p5.image(dvd, x, y);
+        x = x + xspeed;
+        y = y + yspeed;
+        if (x + dvd.width >= p5.width) {
+            xspeed = -xspeed;
+            x = p5.width - dvd.width;
+            pickColor();
+        }
+        else if (x <= 0) {
+            xspeed = -xspeed;
+            x = 0;
+            pickColor();
+        }
+        if (y + dvd.height >= p5.height) {
+            yspeed = -yspeed;
+            y = p5.height - dvd.height;
+            pickColor();
+        }
+        else if (y <= 0) {
+            yspeed = -yspeed;
+            y = 0;
+            pickColor();
         }
     };
-    var Wanderer = /** @class */ (function () {
-        function Wanderer(location) {
-            this.location = location;
-            this.size = 75;
-            this.velocity = p5.createVector(0, 0);
-            this.acc = p5.createVector(0, 0);
-            this.angle = 0.0;
-            this.color = curColor;
-        }
-        Wanderer.prototype.update = function () {
-            var magnitude = p5.random(0, 4);
-            this.angle += p5.random(0, p5.TWO_PI);
-            this.acc.x += p5.cos(this.angle) * magnitude;
-            this.acc.y += p5.sin(this.angle) * magnitude;
-            this.acc.limit(3);
-            this.velocity.add(this.acc);
-            this.velocity.limit(6);
-            this.location.add(this.velocity);
-            this.size -= 2;
-        };
-        Wanderer.prototype.display = function () {
-            p5.fill(this.color, 50, 100);
-            p5.ellipse(this.location.x, this.location.y, this.size);
-        };
-        Wanderer.prototype.isDead = function () {
-            return this.size < 9;
-        };
-        return Wanderer;
-    }());
 };
 new P5(sketch);

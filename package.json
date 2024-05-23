@@ -28,7 +28,6 @@
   "homepage": "https://github.com/Rio-Lv/p5ts",
   "dependencies": {
     "@biomejs/biome": "^1.7.3",
-    "biome": "^0.3.3",
-    "normalize.css": "^8.0.1"
+    "biome": "^0.3.3"
   }
 }
