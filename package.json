@@ -5,7 +5,7 @@
   "main": "public/sketch.js",
   "scripts": {
     "watch": "rollup --config -w",
-    "serve": "live-server --open=public",
+    "serve": "live-server --open=public --watch=public",
     "start": "concurrently \"npm:watch\" \"npm:serve\" "
   },
   "author": "",
