@@ -27,7 +27,7 @@ export default [
 		plugins: [ts(), resolve(), commonjs({ sourceMap: false })],
 	},
 	{
-		input: "src/bubblesort.ts",
+		input: "src/bubbleSort.ts",
 		output: {
 			file: "public/bubblesort/bubblesort.js",
 			format: "cjs",
