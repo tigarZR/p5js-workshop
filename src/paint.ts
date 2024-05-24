@@ -1,17 +1,17 @@
 import P5 from "p5";
-import { isSetup } from "./functions";
 
 const sketch = (p5: P5) => {
-	// instantiate a few variables
 	const wanderers: Wanderer[] = [];
-	let curColor = 100;
+	let curColor = 0;
 
 	// built-in function for setting up the sketch, runs once
 	p5.setup = () => {
 		p5.createCanvas(window.innerWidth, window.innerHeight);
-		isSetup();
 		p5.colorMode(p5.HSB, 100);
 		p5.background(0, 0, 0);
+
+		// you can cap the framerate for debugging
+		// p5.frameRate(10)
 	};
 
 	// built-in function for drawing to the canvas, runs continuously at a frame rate
@@ -23,15 +23,18 @@ const sketch = (p5: P5) => {
 	p5.mouseDragged = () => {
 		wanderers.push(new Wanderer(p5.createVector(p5.mouseX, p5.mouseY)));
 		// change the color slowly
-		curColor = (curColor % 100) + 1;
+		curColor = (curColor % 100) + 0.2;
 	};
 
 	const updateWanderers = (wanderers: Wanderer[]) => {
 		for (const wanderer of wanderers) {
+			// update the position of the particles
 			wanderer.update();
+			// remove particles that are now too small
 			if (wanderer.isDead()) {
 				wanderers.splice(wanderers.indexOf(wanderer), 1);
 			} else {
+				// display the 'still alive' particles
 				wanderer.display();
 			}
 		}
@@ -41,31 +44,17 @@ const sketch = (p5: P5) => {
 		location: P5.Vector;
 		size: number;
 		velocity: P5.Vector;
-		acc: P5.Vector;
-		angle: number;
 		color: number;
 
 		constructor(location: P5.Vector) {
 			this.location = location;
 			this.size = 75;
-			this.velocity = p5.createVector(0, 0);
-			this.acc = p5.createVector(0, 0);
-			this.angle = 0.0;
+			this.velocity = p5.createVector(p5.random(-5, 5), p5.random(-5, 5));
 			this.color = curColor;
 		}
 
 		update() {
-			const magnitude = p5.random(0, 4);
-			this.angle += p5.random(0, p5.TWO_PI);
-			this.acc.x += p5.cos(this.angle) * magnitude;
-			this.acc.y += p5.sin(this.angle) * magnitude;
-			this.acc.limit(3);
-
-			this.velocity.add(this.acc);
-			this.velocity.limit(6);
-
 			this.location.add(this.velocity);
-
 			this.size -= 2;
 		}
 

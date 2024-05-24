@@ -1,5 +1,6 @@
 // Bouncing DVD Logo
 // Daniel Shiffman
+// converted to Typescript by Adam Tigar
 // https://thecodingtrain.com/challenges/131-bouncing-dvd-logo.html
 // https://youtu.be/0j86zuqqTlQ
 // https://editor.p5js.org/codingtrain/sketches/S-es-dYVn
