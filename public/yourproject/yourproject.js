@@ -27,6 +27,7 @@ var sketch = function (p5) {
         p5.background(255);
         p5.textSize(50);
         p5.strokeWeight(4);
+        p5.textAlign(p5.CENTER);
         p5.text('Add your code here!', p5.width / 2, p5.height / 2);
     };
     // built-in function for drawing to the canvas, runs continuously at a frame rate
