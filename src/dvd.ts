@@ -8,8 +8,11 @@
 import P5 from "p5";
 
 const sketch = (p5: P5) => {
+	// starting x and y position of the DVD logo
 	let x: number;
 	let y: number;
+
+	// speed of the logo
 	let xspeed: number;
 	let yspeed: number;
 
@@ -18,6 +21,8 @@ const sketch = (p5: P5) => {
 	let b: number;
 
 	let dvd: P5.Image;
+
+	// built-in function for loading media, runs once
 	p5.preload = () => {
 		dvd = p5.loadImage("dvd_logo.png");
 	};
@@ -32,6 +37,7 @@ const sketch = (p5: P5) => {
 		pickColor();
 	};
 
+	// simple random color picker
 	const pickColor = () => {
 		r = p5.random(100, 256);
 		g = p5.random(100, 256);
@@ -40,11 +46,13 @@ const sketch = (p5: P5) => {
 
 	// built-in function for drawing to the canvas, runs continuously at a frame rate
 	p5.draw = () => {
+		// refresh the background every loop. This is necessary to clear the screen
 		p5.background(0);
-		// Draw the DVD logo
+		// Draw the DVD logo with tint() to apply the random color
 		p5.tint(r, g, b);
 		p5.image(dvd, x, y);
 
+		// update the position of the logo
 		x = x + xspeed;
 		y = y + yspeed;
 

@@ -22,14 +22,17 @@ var P5 = /*@__PURE__*/getDefaultExportFromCjs(p5_min.exports);
 
 // Bouncing DVD Logo
 var sketch = function (p5) {
+    // starting x and y position of the DVD logo
     var x;
     var y;
+    // speed of the logo
     var xspeed;
     var yspeed;
     var r;
     var g;
     var b;
     var dvd;
+    // built-in function for loading media, runs once
     p5.preload = function () {
         dvd = p5.loadImage("dvd_logo.png");
     };
@@ -42,6 +45,7 @@ var sketch = function (p5) {
         yspeed = 5;
         pickColor();
     };
+    // simple random color picker
     var pickColor = function () {
         r = p5.random(100, 256);
         g = p5.random(100, 256);
@@ -49,10 +53,12 @@ var sketch = function (p5) {
     };
     // built-in function for drawing to the canvas, runs continuously at a frame rate
     p5.draw = function () {
+        // refresh the background every loop. This is necessary to clear the screen
         p5.background(0);
-        // Draw the DVD logo
+        // Draw the DVD logo with tint() to apply the random color
         p5.tint(r, g, b);
         p5.image(dvd, x, y);
+        // update the position of the logo
         x = x + xspeed;
         y = y + yspeed;
         if (x + dvd.width >= p5.width) {
