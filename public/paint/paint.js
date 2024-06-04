@@ -22,11 +22,11 @@ var P5 = /*@__PURE__*/getDefaultExportFromCjs(p5_min.exports);
 
 var sketch = function (p5) {
     var wanderers = [];
-    var curColor = 0;
+    var currentHue = 0;
     // built-in function for setting up the sketch, runs once
     p5.setup = function () {
         p5.createCanvas(window.innerWidth, window.innerHeight);
-        p5.colorMode(p5.HSB, 100);
+        p5.colorMode(p5.HSB, 100); // Hue, Saturation, Brightness
         p5.background(0, 0, 0);
         // you can cap the framerate for debugging
         // p5.frameRate(10)
@@ -39,7 +39,7 @@ var sketch = function (p5) {
     p5.mouseDragged = function () {
         wanderers.push(new Wanderer(p5.createVector(p5.mouseX, p5.mouseY)));
         // change the color slowly
-        curColor = (curColor % 100) + 0.2;
+        currentHue = (currentHue % 100) + 0.2;
     };
     var updateWanderers = function (wanderers) {
         for (var _i = 0, wanderers_1 = wanderers; _i < wanderers_1.length; _i++) {
@@ -61,7 +61,7 @@ var sketch = function (p5) {
             this.location = location;
             this.size = 75;
             this.velocity = p5.createVector(p5.random(-5, 5), p5.random(-5, 5));
-            this.color = curColor;
+            this.color = currentHue;
         }
         Wanderer.prototype.update = function () {
             this.location.add(this.velocity);

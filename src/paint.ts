@@ -2,12 +2,12 @@ import P5 from "p5";
 
 const sketch = (p5: P5) => {
 	const wanderers: Wanderer[] = [];
-	let curColor = 0;
+	let currentHue = 0;
 
 	// built-in function for setting up the sketch, runs once
 	p5.setup = () => {
 		p5.createCanvas(window.innerWidth, window.innerHeight);
-		p5.colorMode(p5.HSB, 100);
+		p5.colorMode(p5.HSB, 100); // Hue, Saturation, Brightness
 		p5.background(0, 0, 0);
 
 		// you can cap the framerate for debugging
@@ -23,7 +23,7 @@ const sketch = (p5: P5) => {
 	p5.mouseDragged = () => {
 		wanderers.push(new Wanderer(p5.createVector(p5.mouseX, p5.mouseY)));
 		// change the color slowly
-		curColor = (curColor % 100) + 0.2;
+		currentHue = (currentHue % 100) + 0.2;
 	};
 
 	const updateWanderers = (wanderers: Wanderer[]) => {
@@ -50,7 +50,7 @@ const sketch = (p5: P5) => {
 			this.location = location;
 			this.size = 75;
 			this.velocity = p5.createVector(p5.random(-5, 5), p5.random(-5, 5));
-			this.color = curColor;
+			this.color = currentHue;
 		}
 
 		update() {
